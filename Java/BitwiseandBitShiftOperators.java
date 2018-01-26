@@ -105,7 +105,7 @@ public class BitwiseandBitShiftOperators {
     	
 		System.out.println("***********************************");
     	
-    	
+//		The unsigned right shift operator << shifts zero into the leftmost position.
     	int number7 = 5, number8 = -5;
     	
     	// Signed right shift 
@@ -120,6 +120,10 @@ public class BitwiseandBitShiftOperators {
     	// Unsigned right shift
     	System.out.println("Unsigned right shift of -5 is : "+ (number8 >>> 1));
     	
+//    	Notice, how signed and unsigned right shift works differently for 2's complement.
+//
+//    	The 2's complement of 2147483645 is 3.
+//    	
     	
     	
 	}
