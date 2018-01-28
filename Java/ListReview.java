@@ -22,6 +22,7 @@ public class ListReview {
 	public void arraylistreview(){
 		ArrayList<Object> al1 = new ArrayList<Object>();
 		ArrayList<Object> al2 = new ArrayList<Object>();
+
 		al1.add(12);
 		al1.add("string");
 		al2.add(1);
@@ -30,17 +31,27 @@ public class ListReview {
 		for (int i = 0; i < al1.size(); i++) {
             System.out.println(al1.get(i));  //.get(index)
         }
-		System.out.println(al1);
-		System.out.println(al2);
+		System.out.println("printing al1:"+al1);
+		System.out.println("printing al2:"+al2);	
+		ArrayList<Object> al3 = new ArrayList<Object>();
+		
+		al3.add(new ArrayList<Object>(al2));
+		al2.remove(1);
+		al3.add(new ArrayList<Object>(al2));// evaluate and instantiate a new ArrayList to l3
+		System.out.println("printing al3:"+al3);	
+		
+		
 		
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ListReview lr = new ListReview();
-		lr.arraylistreview();
-		System.out.println("***********************************");
 		lr.listreview();
+		System.out.println("***********************************");
+		
+		lr.arraylistreview();
+
 	}
 
 }
