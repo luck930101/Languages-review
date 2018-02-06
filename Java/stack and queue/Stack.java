@@ -46,12 +46,8 @@ public class Stack {
 		 }
 		 else {
 			 int result = top.data;
-			 top = top.next;
-			 length--;
 			 return result;
 		 }
-
-
 	}
 	
 	public void printstack(Stack stack){
