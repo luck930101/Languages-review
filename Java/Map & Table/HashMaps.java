@@ -32,6 +32,8 @@ public class HashMaps {
           Object key = iterator.next();    
           System.out.println("map.get(key) is :"+map.get(key));    
          }    
+         System.out.println("map.containsKey(c): "+map.containsKey("c"));
+         System.out.println("map.containsKey(e): "+map.containsKey("e"));
          
          System.out.println();
  		 System.out.println("Hashtable :");         
