@@ -9,23 +9,29 @@ import java.util.TreeMap;
 
 public class HashMaps {
 	/*
-	 *HashMapºÍHashtableµÄÇø±ğ
-	 *HashMapºÍHashtable¶¼ÊµÏÖÁËMap½Ó¿Ú£¬µ«¾ö¶¨ÓÃÄÄÒ»¸öÖ®Ç°ÏÈÒªÅªÇå³şËüÃÇÖ®¼äµÄ·Ö±ğ¡£Ö÷ÒªµÄÇø±ğÓĞ£ºÏß³Ì°²È«ĞÔ£¬Í¬²½(synchronization)£¬ÒÔ¼°ËÙ¶È¡£
-	 *HashMap¼¸ºõ¿ÉÒÔµÈ¼ÛÓÚHashtable£¬³ıÁËHashMapÊÇ·ÇsynchronizedµÄ£¬²¢¿ÉÒÔ½ÓÊÜnull(HashMap¿ÉÒÔ½ÓÊÜÎªnullµÄ¼üÖµ(key)ºÍÖµ(value)£¬¶øHashtableÔò²»ĞĞ)¡£
-	 *HashMapÊÇ·Çsynchronized£¬¶øHashtableÊÇsynchronized£¬ÕâÒâÎ¶×ÅHashtableÊÇÏß³Ì°²È«µÄ£¬¶à¸öÏß³Ì¿ÉÒÔ¹²ÏíÒ»¸öHashtable£»¶øÈç¹ûÃ»ÓĞÕıÈ·µÄÍ¬²½µÄ»°£¬¶à¸öÏß³ÌÊÇ²»ÄÜ¹²ÏíHashMapµÄ¡£Java 5Ìá¹©ÁËConcurrentHashMap£¬ËüÊÇHashTableµÄÌæ´ú£¬±ÈHashTableµÄÀ©Õ¹ĞÔ¸üºÃ¡£
-	 *ÁíÒ»¸öÇø±ğÊÇHashMapµÄµü´úÆ÷(Iterator)ÊÇfail-fastµü´úÆ÷£¬¶øHashtableµÄenumeratorµü´úÆ÷²»ÊÇfail-fastµÄ¡£ËùÒÔµ±ÓĞÆäËüÏß³Ì¸Ä±äÁËHashMapµÄ½á¹¹£¨Ôö¼Ó»òÕßÒÆ³ıÔªËØ£©£¬½«»áÅ×³öConcurrentModificationException£¬µ«µü´úÆ÷±¾ÉíµÄremove()·½·¨ÒÆ³ıÔªËØÔò²»»áÅ×³öConcurrentModificationExceptionÒì³£¡£µ«Õâ²¢²»ÊÇÒ»¸öÒ»¶¨·¢ÉúµÄĞĞÎª£¬Òª¿´JVM¡£ÕâÌõÍ¬ÑùÒ²ÊÇEnumerationºÍIteratorµÄÇø±ğ¡£
-	 *ÓÉÓÚHashtableÊÇÏß³Ì°²È«µÄÒ²ÊÇsynchronized£¬ËùÒÔÔÚµ¥Ïß³Ì»·¾³ÏÂËü±ÈHashMapÒªÂı¡£Èç¹ûÄã²»ĞèÒªÍ¬²½£¬Ö»ĞèÒªµ¥Ò»Ïß³Ì£¬ÄÇÃ´Ê¹ÓÃHashMapĞÔÄÜÒªºÃ¹ıHashtable¡£
-	 *HashMap²»ÄÜ±£Ö¤Ëæ×ÅÊ±¼äµÄÍÆÒÆMapÖĞµÄÔªËØ´ÎĞòÊÇ²»±äµÄ¡£
+	 *HashMapå’ŒHashtableçš„åŒºåˆ«
+	 *HashMapå’ŒHashtableéƒ½å®ç°äº†Mapæ¥å£ï¼Œä½†å†³å®šç”¨å“ªä¸€ä¸ªä¹‹å‰å…ˆè¦å¼„æ¸…æ¥šå®ƒä»¬ä¹‹é—´çš„åˆ†åˆ«ã€‚ä¸»è¦çš„åŒºåˆ«æœ‰ï¼šçº¿ç¨‹å®‰å…¨æ€§ï¼ŒåŒæ­¥(synchronization)ï¼Œä»¥åŠé€Ÿåº¦ã€‚
+	 *HashMapå‡ ä¹å¯ä»¥ç­‰ä»·äºHashtableï¼Œé™¤äº†HashMapæ˜¯ésynchronizedçš„ï¼Œå¹¶å¯ä»¥æ¥å—null(HashMapå¯ä»¥æ¥å—ä¸ºnullçš„é”®å€¼(key)å’Œå€¼(value)ï¼Œè€ŒHashtableåˆ™ä¸è¡Œ)ã€‚
+	 *HashMapæ˜¯ésynchronizedï¼Œè€ŒHashtableæ˜¯synchronizedï¼Œè¿™æ„å‘³ç€Hashtableæ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œå¤šä¸ªçº¿ç¨‹å¯ä»¥å…±äº«ä¸€ä¸ªHashtableï¼›è€Œå¦‚æœæ²¡æœ‰æ­£ç¡®çš„åŒæ­¥çš„è¯ï¼Œå¤šä¸ªçº¿ç¨‹æ˜¯ä¸èƒ½å…±äº«HashMapçš„ã€‚Java 5æä¾›äº†ConcurrentHashMapï¼Œå®ƒæ˜¯HashTableçš„æ›¿ä»£ï¼Œæ¯”HashTableçš„æ‰©å±•æ€§æ›´å¥½ã€‚
+	 *å¦ä¸€ä¸ªåŒºåˆ«æ˜¯HashMapçš„è¿­ä»£å™¨(Iterator)æ˜¯fail-fastè¿­ä»£å™¨ï¼Œè€ŒHashtableçš„enumeratorè¿­ä»£å™¨ä¸æ˜¯fail-fastçš„ã€‚æ‰€ä»¥å½“æœ‰å…¶å®ƒçº¿ç¨‹æ”¹å˜äº†HashMapçš„ç»“æ„ï¼ˆå¢åŠ æˆ–è€…ç§»é™¤å…ƒç´ ï¼‰ï¼Œå°†ä¼šæŠ›å‡ºConcurrentModificationExceptionï¼Œä½†è¿­ä»£å™¨æœ¬èº«çš„remove()æ–¹æ³•ç§»é™¤å…ƒç´ åˆ™ä¸ä¼šæŠ›å‡ºConcurrentModificationExceptionå¼‚å¸¸ã€‚ä½†è¿™å¹¶ä¸æ˜¯ä¸€ä¸ªä¸€å®šå‘ç”Ÿçš„è¡Œä¸ºï¼Œè¦çœ‹JVMã€‚è¿™æ¡åŒæ ·ä¹Ÿæ˜¯Enumerationå’ŒIteratorçš„åŒºåˆ«ã€‚
+	 *ç”±äºHashtableæ˜¯çº¿ç¨‹å®‰å…¨çš„ä¹Ÿæ˜¯synchronizedï¼Œæ‰€ä»¥åœ¨å•çº¿ç¨‹ç¯å¢ƒä¸‹å®ƒæ¯”HashMapè¦æ…¢ã€‚å¦‚æœä½ ä¸éœ€è¦åŒæ­¥ï¼Œåªéœ€è¦å•ä¸€çº¿ç¨‹ï¼Œé‚£ä¹ˆä½¿ç”¨HashMapæ€§èƒ½è¦å¥½è¿‡Hashtableã€‚
+	 *HashMapä¸èƒ½ä¿è¯éšç€æ—¶é—´çš„æ¨ç§»Mapä¸­çš„å…ƒç´ æ¬¡åºæ˜¯ä¸å˜çš„ã€‚
 	 */
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("HashMap :");    
-		Map map=new HashMap();                
+		Map<String, String> map=new HashMap<String, String>();                
 		map.put("a", "aaa");    
 		map.put("b", "bbb");    
 		map.put("c", "ccc");    
-		map.put("d", "ddd");    
+		map.put("d", "ddd");  
+		
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			 
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());  
+		 
+		}
             
          Iterator iterator = map.keySet().iterator();                
          while (iterator.hasNext()) {    
